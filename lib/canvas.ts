@@ -29,6 +29,7 @@ export const initializeFabric = ({
   const canvas = new fabric.Canvas(canvasRef.current, {
     width: canvasElement?.clientWidth,
     height: canvasElement?.clientHeight,
+    preserveObjectStacking: true,
   });
 
   // set canvas reference to fabricRef so we can use it later anywhere outside canvas listener
@@ -296,7 +297,6 @@ export const handleCanvasSelectionCreated = ({
 
   // if no element is selected, return
   if (!options?.selected) return;
-
   // get the selected element
   const selectedElement = options?.selected[0] as fabric.Object;
 

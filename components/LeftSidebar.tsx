@@ -5,8 +5,6 @@ import Image from 'next/image';
 
 import { getShapeInfo } from '@/lib/utils';
 import { getObjectById } from '@/lib/canvas';
-import { GoMoveToTop, GoMoveToBottom } from 'react-icons/go';
-import { bringElement } from '@/lib/shapes';
 
 const LeftSidebar = ({
   allShapes,
@@ -17,23 +15,8 @@ const LeftSidebar = ({
   fabricRef: React.RefObject<fabric.Canvas | null>;
   syncShapeInStorage: (obj: any) => void;
 }) => {
-  const handleMoveToTop = () => {
-    const direction = 'front';
-    bringElement({
-      canvas: fabricRef.current as fabric.Canvas,
-      direction,
-      syncShapeInStorage,
-    });
-  };
-  const handleMoveToBottom = () => {
-    const direction = 'back';
-    bringElement({
-      canvas: fabricRef.current as fabric.Canvas,
-      direction,
-      syncShapeInStorage,
-    });
-  };
   // memoize the result of this function so that it doesn't change on every render but only when there are new shapes
+
   const memoizedShapes = useMemo(
     () => (
       <section className='flex flex-col border-t border-primary-grey-200 bg-primary-black text-primary-grey-300 min-w-[227px] sticky left-0 h-full max-sm:hidden select-none overflow-y-auto pb-20'>
@@ -54,7 +37,6 @@ const LeftSidebar = ({
               // Select the object on the canvas
               if (fabricObject) {
                 fabricRef.current.setActiveObject(fabricObject);
-
                 fabricRef.current.requestRenderAll();
               }
             };
@@ -77,10 +59,7 @@ const LeftSidebar = ({
                     {info.name}
                   </h3>
                 </div>
-                <div className='flex flex-row items-center gap-3'>
-                  <GoMoveToTop onClick={handleMoveToTop} />
-                  <GoMoveToBottom onClick={handleMoveToBottom} />
-                </div>
+                <div className='flex flex-row items-center gap-3'></div>
               </div>
             );
           })}

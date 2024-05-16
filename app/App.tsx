@@ -21,7 +21,7 @@ import { ActiveElement, Attributes } from '@/types/type';
 import { useMutation, useRedo, useStorage, useUndo } from '@/liveblocks.config';
 import { defaultNavElement } from '@/constants';
 import { handleDelete, handleKeyDown } from '@/lib/key-events';
-import { handleImageUpload } from '@/lib/shapes';
+import { bringElement, handleImageUpload } from '@/lib/shapes';
 import { initializeApp } from 'firebase/app';
 import { deleteObject, getStorage, ref } from 'firebase/storage';
 
@@ -200,6 +200,7 @@ export default function Page() {
         setElementAttributes,
       });
     });
+
     canvas.on('path:created', (options: any) => {
       handlePathCreated({
         options,

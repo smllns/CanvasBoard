@@ -218,6 +218,20 @@ export const modifyShape = ({
   } else if (property === 'height') {
     selectedElement.set('scaleY', 1);
     selectedElement.set('height', value);
+  } else if (property === 'front') {
+    bringElement({
+      canvas: canvas,
+      direction: 'front',
+      syncShapeInStorage,
+    });
+    selectedElement.set(property as keyof object, value);
+  } else if (property === 'back') {
+    bringElement({
+      canvas: canvas,
+      direction: 'back',
+      syncShapeInStorage,
+    });
+    selectedElement.set(property as keyof object, value);
   } else {
     if (selectedElement[property as keyof object] === value) return;
     selectedElement.set(property as keyof object, value);
@@ -235,20 +249,22 @@ export const bringElement = ({
   syncShapeInStorage,
 }: ElementDirection) => {
   if (!canvas) return;
-
+  console.log(canvas);
   // get the selected element. If there is no selected element or there are more than one selected element, return
   const selectedElement = canvas.getActiveObject();
-  console.log(selectedElement);
 
   if (!selectedElement || selectedElement?.type === 'activeSelection') return;
-
+  // canvas.remove(selectedElement);
   // bring the selected element to the front
   if (direction === 'front') {
+    console.log('hi');
+
     canvas.bringToFront(selectedElement);
   } else if (direction === 'back') {
+    console.log('bye');
     canvas.sendToBack(selectedElement);
   }
-
+  canvas.requestRenderAll();
   // canvas.renderAll();
   syncShapeInStorage(selectedElement);
 

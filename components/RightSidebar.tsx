@@ -2,7 +2,6 @@ import React, { useRef } from 'react';
 import Dimensions from './settings/Dimensions';
 import Text from './settings/Text';
 import Color from './settings/Color';
-// import Export from './settings/Export';
 import { RightSidebarProps } from '@/types/type';
 import { modifyShape } from '@/lib/shapes';
 
@@ -63,8 +62,6 @@ const RightSidebar = ({
         attributeType='stroke'
         handleInputChange={handleInputChange}
       />
-
-      {/* <Export /> */}
     </section>
   );
 };
