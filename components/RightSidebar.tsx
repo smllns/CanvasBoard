@@ -4,6 +4,7 @@ import Text from './settings/Text';
 import Color from './settings/Color';
 import { RightSidebarProps } from '@/types/type';
 import { modifyShape } from '@/lib/shapes';
+import CanvasColor from './settings/CanvasColor';
 
 const RightSidebar = ({
   elementAttributes,
@@ -12,6 +13,8 @@ const RightSidebar = ({
   isEditingRef,
   activeObjectRef,
   syncShapeInStorage,
+  // setBgColor,
+  handleBackgroundColorChange,
 }: RightSidebarProps) => {
   const colorInputRef = useRef(null);
   const strokeInputRef = useRef(null);
@@ -62,6 +65,7 @@ const RightSidebar = ({
         attributeType='stroke'
         handleInputChange={handleInputChange}
       />
+      <CanvasColor handleBackgroundColorChange={handleBackgroundColorChange} />
     </section>
   );
 };

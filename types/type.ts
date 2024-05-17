@@ -97,6 +97,8 @@ export type RightSidebarProps = {
   activeObjectRef: React.RefObject<fabric.Object | null>;
   isEditingRef: React.MutableRefObject<boolean>;
   syncShapeInStorage: (obj: any) => void;
+  // setBgColor: React.Dispatch<React.SetStateAction>;
+  handleBackgroundColorChange: (obj: any) => void;
 };
 
 export type NavbarProps = {

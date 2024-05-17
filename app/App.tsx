@@ -21,7 +21,7 @@ import { ActiveElement, Attributes } from '@/types/type';
 import { useMutation, useRedo, useStorage, useUndo } from '@/liveblocks.config';
 import { defaultNavElement } from '@/constants';
 import { handleDelete, handleKeyDown } from '@/lib/key-events';
-import { bringElement, handleImageUpload } from '@/lib/shapes';
+import { handleImageUpload } from '@/lib/shapes';
 import { initializeApp } from 'firebase/app';
 import { deleteObject, getStorage, ref } from 'firebase/storage';
 
@@ -47,6 +47,7 @@ export default function Page() {
   const activeObjectRef = useRef<fabric.Object | null>(null);
   const imageInputRef = useRef<HTMLInputElement>(null);
   const isEditingRef = useRef(false);
+  const [bgColor, setBgColor] = useState('#1f2731'); // Initial background color
 
   const canvasObjects = useStorage((root) => root.canvasObjects);
 
@@ -56,12 +57,23 @@ export default function Page() {
     fontSize: '',
     fontFamily: '',
     fontWeight: '',
-    fill: '#5ccc40',
-    stroke: '#427fbb',
+    fill: '#aabbcc',
+    stroke: '#aabbcc',
   });
+
+  const syncBackgroundColor = useMutation(({ storage }, color) => {
+    storage.set('bgColor', color);
+  }, []);
+
+  // Update background color and sync with Liveblocks
+  const handleBackgroundColorChange = (color) => {
+    setBgColor(color);
+    syncBackgroundColor(color);
+  };
 
   const syncShapeInStorage = useMutation(({ storage }, object) => {
     if (!object) return;
+
     const { objectId, zIndex } = object;
     const shapeData = object.toJSON();
 
@@ -137,7 +149,10 @@ export default function Page() {
   };
 
   useEffect(() => {
-    const canvas = initializeFabric({ canvasRef, fabricRef });
+    const canvas = initializeFabric({
+      canvasRef,
+      fabricRef,
+    });
 
     canvas.on('mouse:down', (options: any) => {
       handleCanvasMouseDown({
@@ -254,7 +269,12 @@ export default function Page() {
           fabricRef={fabricRef}
           syncShapeInStorage={syncShapeInStorage}
         />
-        <Live canvasRef={canvasRef} undo={undo} redo={redo} />
+        <Live
+          canvasRef={canvasRef}
+          undo={undo}
+          redo={redo}
+          backgroundColor={bgColor}
+        />
         <RightSidebar
           elementAttributes={elementAttributes}
           setElementAttributes={setElementAttributes}
@@ -262,6 +282,8 @@ export default function Page() {
           isEditingRef={isEditingRef}
           activeObjectRef={activeObjectRef}
           syncShapeInStorage={syncShapeInStorage}
+          // setBgColor={setBgColor}
+          handleBackgroundColorChange={handleBackgroundColorChange}
         />
       </section>
     </main>

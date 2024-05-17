@@ -2,6 +2,7 @@ import {
   useBroadcastEvent,
   useEventListener,
   useMyPresence,
+  useStorage,
 } from '@/liveblocks.config';
 import LiveCursors from './cursor/LiveCursors';
 import { useCallback, useEffect, useState } from 'react';
@@ -23,17 +24,29 @@ type Props = {
   canvasRef: React.MutableRefObject<HTMLCanvasElement | null>;
   undo: () => void;
   redo: () => void;
+  backgroundColor: string;
 };
 
-const Live = ({ canvasRef, undo, redo }: Props) => {
+const Live = ({ canvasRef, undo, redo, backgroundColor }: Props) => {
   const [{ cursor }, updateMyPresence] = useMyPresence();
   const [cursorState, setCursorState] = useState<CursorState>({
     mode: CursorMode.Hidden,
   });
   const [reaction, setReaction] = useState<Reaction[]>([]);
 
-  const broadcast = useBroadcastEvent();
+  const [bgColor, setBgColor] = useState(backgroundColor); // Initial background color
 
+  // Listen for changes to the background color in Liveblocks storage
+  const backCol = useStorage((root) => root.bgColor);
+
+  useEffect(() => {
+    if (!backCol) return;
+    if (backCol !== backgroundColor) {
+      setBgColor(backCol);
+    }
+  }, [backCol, backgroundColor]);
+
+  const broadcast = useBroadcastEvent();
   useInterval(() => {
     setReaction((reaction) =>
       reaction.filter((r) => r.timestamp > Date.now() - 4000)
@@ -186,6 +199,7 @@ const Live = ({ canvasRef, undo, redo }: Props) => {
         onPointerDown={handlePointerDown}
         onPointerUp={handlePointerUp}
         className='h-full w-full flex flex-1 justify-center items-center relative'
+        style={{ backgroundColor: backCol }}
       >
         {/* <h1 className='text-2xl text-white '>Liveblocks figma clone</h1> */}
         <canvas ref={canvasRef} />

@@ -22,6 +22,7 @@ type Storage = {
   // author: LiveObject<{ firstName: string, lastName: string }>,
   // ...
   canvasObjects: LiveMap<string, any>;
+  bgColor: LiveMap<string, any>;
 };
 
 // Optionally, UserMeta represents static/readonly metadata on each user, as
