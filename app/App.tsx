@@ -6,12 +6,15 @@ import Live from '@/components/Live';
 import Navbar from '@/components/Navbar';
 import { useEffect, useRef, useState } from 'react';
 import {
+  handleCanvasGrabDown,
+  handleCanvasGrabUp,
   handleCanvasMouseDown,
   handleCanvasMouseUp,
   handleCanvasObjectModified,
   handleCanvasObjectScaling,
   handleCanvasSelectionCreated,
-  handleCanvaseMouseMove,
+  handleCanvasZoom,
+  handleMoving,
   handlePathCreated,
   handleResize,
   initializeFabric,
@@ -50,6 +53,9 @@ export default function Page() {
   const [bgColor, setBgColor] = useState('#1f2731'); // Initial background color
 
   const canvasObjects = useStorage((root) => root.canvasObjects);
+  const isGrabbing = useRef(false);
+  const lastPosX = useRef(0);
+  const lastPosY = useRef(0);
 
   const [elementAttributes, setElementAttributes] = useState<Attributes>({
     width: '',
@@ -149,6 +155,7 @@ export default function Page() {
   };
 
   useEffect(() => {
+    // console.log(isGrabbing);
     const canvas = initializeFabric({
       canvasRef,
       fabricRef,
@@ -163,11 +170,39 @@ export default function Page() {
         selectedShapeRef,
       });
     });
-
-    canvas.on('mouse:move', (options: any) => {
-      handleCanvaseMouseMove({
+    canvas.on('mouse:down', (options: any) => {
+      handleCanvasGrabDown({
         options,
         canvas,
+        isGrabbing,
+        lastPosX,
+        lastPosY,
+      });
+    });
+
+    canvas.on('mouse:up', () => {
+      handleCanvasGrabUp({
+        isGrabbing,
+      });
+    });
+
+    // canvas.on('mouse:move', (options: any) => {
+    //   handleCanvaseMouseMove({
+    //     options,
+    //     canvas,
+    //     isDrawing,
+    //     selectedShapeRef,
+    //     shapeRef,
+    //     syncShapeInStorage,
+    //   });
+    // });
+    canvas.on('mouse:move', (options: any) => {
+      handleMoving({
+        options,
+        canvas,
+        isGrabbing,
+        lastPosX,
+        lastPosY,
         isDrawing,
         selectedShapeRef,
         shapeRef,
@@ -220,6 +255,12 @@ export default function Page() {
       handlePathCreated({
         options,
         syncShapeInStorage,
+      });
+    });
+    canvas.on('mouse:wheel', (options: any) => {
+      handleCanvasZoom({
+        options,
+        canvas,
       });
     });
 

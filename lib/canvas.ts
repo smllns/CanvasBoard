@@ -30,6 +30,7 @@ export const initializeFabric = ({
     width: canvasElement?.clientWidth,
     height: canvasElement?.clientHeight,
     preserveObjectStacking: true,
+    selection: false,
   });
 
   // set canvas reference to fabricRef so we can use it later anywhere outside canvas listener
@@ -396,13 +397,16 @@ export const renderCanvas = ({
   fabricRef.current?.renderAll();
 };
 
-// resize canvas dimensions on window resize
-export const handleResize = ({ canvas }: { canvas: fabric.Canvas | null }) => {
+export const handleResize = ({
+  fabricRef,
+}: {
+  fabricRef: React.MutableRefObject<fabric.Canvas | null>;
+}) => {
   const canvasElement = document.getElementById('canvas');
-  if (!canvasElement) return;
+  const canvas = fabricRef.current;
+  if (!canvasElement || !canvas) return; // Check if either canvasElement or canvas is null
 
-  if (!canvas) return;
-
+  // Use optional chaining to access clientWidth and clientHeight safely
   canvas.setDimensions({
     width: canvasElement.clientWidth,
     height: canvasElement.clientHeight,
@@ -415,25 +419,130 @@ export const handleCanvasZoom = ({
   canvas,
 }: {
   options: fabric.IEvent & { e: WheelEvent };
-  canvas: fabric.Canvas;
+  canvas: fabric.Canvas | null;
 }) => {
   const delta = options.e?.deltaY;
-  let zoom = canvas.getZoom();
+  let zoom = canvas?.getZoom() ?? 1; // Ensure canvas is not null and set default zoom to 1
 
   // allow zooming to min 20% and max 100%
   const minZoom = 0.2;
-  const maxZoom = 1;
-  const zoomStep = 0.001;
+  const maxZoom = 2;
+  const zoomStep = 0.1; // Increase the step for smoother zooming
 
-  // calculate zoom based on mouse scroll wheel with min and max zoom
-  zoom = Math.min(Math.max(minZoom, zoom + delta * zoomStep), maxZoom);
+  // Calculate the zoom direction based on the scroll direction
+  const zoomDirection = delta && delta > 0 ? -1 : 1;
 
-  // set zoom to canvas
-  // zoomToPoint: http://fabricjs.com/docs/fabric.Canvas.html#zoomToPoint
-  canvas.zoomToPoint({ x: options.e.offsetX, y: options.e.offsetY }, zoom);
+  // Calculate the new zoom level
+  zoom = Math.min(Math.max(minZoom, zoom + zoomDirection * zoomStep), maxZoom);
 
+  // Calculate the zoom point
+  const zoomPoint = new fabric.Point(options.e.offsetX, options.e.offsetY);
+
+  // Zoom the canvas
+  if (canvas) {
+    canvas.zoomToPoint(zoomPoint, zoom);
+  }
+
+  // Prevent the default behavior (e.g., page scrolling) and stop the event propagation
   options.e.preventDefault();
   options.e.stopPropagation();
+};
+
+export const handleMoving = ({
+  options,
+  canvas,
+  isGrabbing,
+  lastPosX,
+  lastPosY,
+  isDrawing,
+  selectedShapeRef,
+  shapeRef,
+  syncShapeInStorage,
+}: {
+  options: fabric.IEvent;
+  canvas: fabric.Canvas;
+  isGrabbing: React.MutableRefObject<boolean>;
+  lastPosX: React.MutableRefObject<number>;
+  lastPosY: React.MutableRefObject<number>;
+  grabMoveHandlerRef: React.MutableRefObject<EventListener | null>;
+  isDrawing: React.MutableRefObject<boolean>;
+  selectedShapeRef: any;
+  shapeRef: any;
+  syncShapeInStorage: (shape: fabric.Object) => void;
+}) => {
+  if (options.target)
+    handleCanvaseMouseMove({
+      options,
+      canvas,
+      isDrawing,
+      selectedShapeRef,
+      shapeRef,
+      syncShapeInStorage,
+    });
+  if (!options.target)
+    handleCanvasGrabMove({
+      e: options,
+      canvas,
+      isGrabbing,
+      lastPosX,
+      lastPosY,
+    });
+};
+
+export const handleCanvasGrabDown = ({
+  options,
+  canvas,
+  isGrabbing,
+  lastPosX,
+  lastPosY,
+}: {
+  options: fabric.IEvent;
+  canvas: fabric.Canvas;
+  isGrabbing: React.MutableRefObject<boolean>;
+  lastPosX: React.MutableRefObject<number>;
+  lastPosY: React.MutableRefObject<number>;
+}) => {
+  if (options.target) return;
+  isGrabbing.current = true;
+
+  const pointer = canvas.getPointer(options.e);
+  lastPosX.current = pointer.x;
+  lastPosY.current = pointer.y;
+};
+export const handleCanvasGrabMove = ({
+  e,
+  canvas,
+  isGrabbing,
+  lastPosX,
+  lastPosY,
+}: {
+  e: fabric.IEvent;
+  canvas: fabric.Canvas;
+  isGrabbing: React.MutableRefObject<boolean>;
+  lastPosX: React.MutableRefObject<number>;
+  lastPosY: React.MutableRefObject<number>;
+}) => {
+  if (!isGrabbing.current) return;
+
+  const pointer = canvas.getPointer(e.e);
+  const zoom = canvas.getZoom();
+
+  const deltaX = (pointer.x - lastPosX.current) * zoom;
+  const deltaY = (pointer.y - lastPosY.current) * zoom;
+  const delta = new fabric.Point(deltaX, deltaY);
+
+  canvas.relativePan(delta);
+
+  lastPosX.current = pointer.x;
+  lastPosY.current = pointer.y;
+};
+
+export const handleCanvasGrabUp = ({
+  isGrabbing,
+}: {
+  isGrabbing: React.MutableRefObject<boolean>;
+}) => {
+  isGrabbing.current = false;
 };
 
 export const getObjectById = ({
