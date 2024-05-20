@@ -464,7 +464,6 @@ export const handleMoving = ({
   isGrabbing: React.MutableRefObject<boolean>;
   lastPosX: React.MutableRefObject<number>;
   lastPosY: React.MutableRefObject<number>;
-  grabMoveHandlerRef: React.MutableRefObject<EventListener | null>;
   isDrawing: React.MutableRefObject<boolean>;
   selectedShapeRef: any;
   shapeRef: any;
