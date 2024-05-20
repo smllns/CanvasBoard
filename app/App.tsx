@@ -186,16 +186,6 @@ export default function Page() {
       });
     });
 
-    // canvas.on('mouse:move', (options: any) => {
-    //   handleCanvaseMouseMove({
-    //     options,
-    //     canvas,
-    //     isDrawing,
-    //     selectedShapeRef,
-    //     shapeRef,
-    //     syncShapeInStorage,
-    //   });
-    // });
     canvas.on('mouse:move', (options: any) => {
       handleMoving({
         options,

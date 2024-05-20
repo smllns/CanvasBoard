@@ -470,7 +470,7 @@ export const handleMoving = ({
   shapeRef: any;
   syncShapeInStorage: (shape: fabric.Object) => void;
 }) => {
-  if (options.target)
+  if (selectedShapeRef.current !== null)
     handleCanvaseMouseMove({
       options,
       canvas,
@@ -479,7 +479,7 @@ export const handleMoving = ({
       shapeRef,
       syncShapeInStorage,
     });
-  if (!options.target)
+  if (selectedShapeRef.current === null)
     handleCanvasGrabMove({
       e: options,
       canvas,
