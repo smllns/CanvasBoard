@@ -565,5 +565,3 @@ export const getObjectById = ({
 
   return null; // Return null if no object with the specified ID is found
 };
-
-//hi
