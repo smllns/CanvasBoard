@@ -5,6 +5,7 @@ import Image from 'next/image';
 
 import { getShapeInfo } from '@/lib/utils';
 import { getObjectById } from '@/lib/canvas';
+import './styles.css'; // Import your CSS file
 
 const LeftSidebar = ({
   allShapes,
@@ -19,8 +20,8 @@ const LeftSidebar = ({
 
   const memoizedShapes = useMemo(
     () => (
-      <section className='flex flex-col border-t border-primary-grey-200 bg-primary-black text-primary-grey-300 min-w-[227px] sticky left-0 h-full max-sm:hidden select-none overflow-y-auto pb-20'>
-        <h3 className='border border-primary-grey-200 px-5 py-4 text-xs uppercase'>
+      <section className='flex flex-col  bg-primary-graphite text-primary-grey-300 min-w-[188px] sticky ml-[8px] my-2 max-sm:hidden select-none overflow-y-auto  rounded-lg'>
+        <h3 className=' px-8 text-xs font-medium uppercase text-[#9E9E9E] pt-3'>
           Layers
         </h3>
         <div className='flex flex-col'>
@@ -44,22 +45,21 @@ const LeftSidebar = ({
             return (
               <div
                 key={shape[1]?.objectId}
-                className='group my-1 flex items-center justify-between gap-2 px-5 py-2.5 hover:cursor-pointer hover:bg-primary-green hover:text-primary-black'
+                className=' normal-border group  my-1 flex items-center justify-between gap-2 px-2  border hover:cursor-pointer '
                 onClick={handleClick}
               >
-                <div className='flex flex-row items-center'>
+                <div className='flex flex-row items-center justify-center'>
                   <Image
                     src={info?.icon}
                     alt='Layer'
                     width={16}
                     height={16}
-                    className='group-hover:invert pr-3'
+                    className='pr-2 '
                   />
-                  <h3 className='text-sm font-semibold capitalize'>
+                  <h3 className='text-xs font-normal capitalize pt-0.5 text-white'>
                     {info.name}
                   </h3>
                 </div>
-                <div className='flex flex-row items-center gap-3'></div>
               </div>
             );
           })}

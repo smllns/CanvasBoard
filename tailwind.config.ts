@@ -27,6 +27,8 @@ const config = {
             200: '#202731',
             300: '#C4D3ED',
           },
+          graphite: ' #161616',
+          verygrey: '#101010',
         },
       },
       keyframes: {

@@ -274,12 +274,22 @@ export default function Page() {
     };
   }, []);
 
+  const [color, setColor] = useState('#1f2731');
+  const backCol = useStorage((root) => root.bgColor);
+
+  useEffect(() => {
+    if (!backCol) return;
+    if (backCol !== color) {
+      setColor(backCol);
+    }
+  }, [backCol, color]);
+
   useEffect(() => {
     renderCanvas({ fabricRef, canvasObjects, activeObjectRef });
   }, [canvasObjects]);
 
   return (
-    <main className='h-screen overflow-hidden'>
+    <main className='h-screen overflow-hidden '>
       <Navbar
         activeElement={activeElement}
         handleActiveElement={handleActiveElement}
@@ -294,7 +304,10 @@ export default function Page() {
           });
         }}
       />
-      <section className='flex h-full flex-row'>
+      <section
+        className='flex h-full flex-row'
+        style={{ backgroundColor: color }}
+      >
         <LeftSidebar
           allShapes={Array.from(canvasObjects)}
           fabricRef={fabricRef}
@@ -313,7 +326,6 @@ export default function Page() {
           isEditingRef={isEditingRef}
           activeObjectRef={activeObjectRef}
           syncShapeInStorage={syncShapeInStorage}
-          // setBgColor={setBgColor}
           handleBackgroundColorChange={handleBackgroundColorChange}
         />
       </section>

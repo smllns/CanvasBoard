@@ -1,7 +1,11 @@
-<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g id="tool">
-<path id="Vector" d="M3.33325 5.83337V3.33337H16.6666V5.83337" stroke="#C4D3ED" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-<path id="Vector_2" d="M7.5 16.6666H12.5" stroke="#C4D3ED" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-<path id="Vector_3" d="M10 3.33337V16.6667" stroke="#C4D3ED" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_23_24)">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M13.0459 1.02295C13.0459 1.40955 12.7325 1.72295 12.3459 1.72295L-0.300012 1.72295C-0.686612 1.72295 -1.00001 1.40955 -1.00001 1.02295C-1.00001 0.63635 -0.686612 0.322949 -0.300013 0.322949L12.3459 0.322949C12.7325 0.322949 13.0459 0.636349 13.0459 1.02295Z" fill="#9E9E9E"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M5.72296 0.699978C6.10956 0.699977 6.42296 1.01338 6.42296 1.39998L6.42296 14.0459C6.42296 14.4325 6.10956 14.7459 5.72296 14.7459C5.33636 14.7459 5.02296 14.4325 5.02296 14.0459L5.02296 1.39998C5.02296 1.01338 5.33636 0.699977 5.72296 0.699978Z" fill="#9E9E9E"/>
 </g>
+<defs>
+<clipPath id="clip0_23_24">
+<rect width="12" height="12" rx="1" fill="white"/>
+</clipPath>
+</defs>
 </svg>

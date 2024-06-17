@@ -2,7 +2,7 @@ import {
   fontFamilyOptions,
   fontSizeOptions,
   fontWeightOptions,
-} from "@/constants";
+} from '@/constants';
 
 import {
   Select,
@@ -10,20 +10,20 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../ui/select";
+} from '../ui/select';
 
 const selectConfigs = [
   {
-    property: "fontFamily",
-    placeholder: "Choose a font",
+    property: 'fontFamily',
+    placeholder: 'Choose a font',
     options: fontFamilyOptions,
   },
-  { property: "fontSize", placeholder: "30", options: fontSizeOptions },
   {
-    property: "fontWeight",
-    placeholder: "Semibold",
+    property: 'fontWeight',
+    placeholder: 'Semibold',
     options: fontWeightOptions,
   },
+  { property: 'fontSize', placeholder: '30', options: fontSizeOptions },
 ];
 
 type TextProps = {
@@ -39,8 +39,8 @@ const Text = ({
   fontWeight,
   handleInputChange,
 }: TextProps) => (
-  <div className='flex flex-col gap-3 border-b border-primary-grey-200 px-5 py-3'>
-    <h3 className='text-[10px] uppercase'>Text</h3>
+  <div className='flex flex-col gap-3  px-5 py-3'>
+    <h3 className='  text-xs font-medium uppercase text-[#9E9E9E]'>Text</h3>
 
     <div className='flex flex-col gap-3'>
       {RenderSelect({
@@ -89,30 +89,30 @@ const RenderSelect = ({
     key={config.property}
     onValueChange={(value) => handleInputChange(config.property, value)}
     value={
-      config.property === "fontFamily"
+      config.property === 'fontFamily'
         ? fontFamily
-        : config.property === "fontSize"
-          ? fontSize
-          : fontWeight
+        : config.property === 'fontSize'
+        ? fontSize
+        : fontWeight
     }
   >
-    <SelectTrigger className='no-ring w-full rounded-sm border border-primary-grey-200'>
+    <SelectTrigger className='no-ring w-full rounded-sm border'>
       <SelectValue
         placeholder={
-          config.property === "fontFamily"
-            ? "Choose a font"
-            : config.property === "fontSize"
-              ? "30"
-              : "Semibold"
+          config.property === 'fontFamily'
+            ? 'Choose a font'
+            : config.property === 'fontSize'
+            ? '30'
+            : 'Semibold'
         }
       />
     </SelectTrigger>
-    <SelectContent className='border-primary-grey-200 bg-primary-black text-primary-grey-300'>
+    <SelectContent className=' bg-black text-white'>
       {config.options.map((option) => (
         <SelectItem
           key={option.value}
           value={option.value}
-          className=' hover:bg-primary-green hover:text-primary-black'
+          className=' hover:bg-primary-verygrey hover:text-white'
         >
           {option.label}
         </SelectItem>

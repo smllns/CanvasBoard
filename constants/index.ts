@@ -72,10 +72,10 @@ export const defaultNavElement = {
   value: 'select',
 };
 
-export const directionOptions = [
-  { label: 'Bring to Front', value: 'front', icon: '/assets/front.svg' },
-  { label: 'Send to Back', value: 'back', icon: '/assets/back.svg' },
-];
+// export const directionOptions = [
+//   { label: 'Bring to Front', value: 'front', icon: '/assets/front.svg' },
+//   { label: 'Send to Back', value: 'back', icon: '/assets/back.svg' },
+// ];
 
 export const fontFamilyOptions = [
   { value: 'Helvetica', label: 'Helvetica' },

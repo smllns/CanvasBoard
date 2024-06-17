@@ -1,17 +1,17 @@
 import type { Metadata } from 'next';
-import { Work_Sans } from 'next/font/google';
+import { Montserrat } from 'next/font/google';
 import './globals.css';
 import { Room } from './Room';
 
-const workSans = Work_Sans({
+const montserrat = Montserrat({
   subsets: ['latin'],
-  variable: '--font-work-sans',
+  variable: '--font-montserrat',
   weight: ['400', '600', '700'],
 });
 
 export const metadata: Metadata = {
-  title: 'Figma Clone',
-  description: 'Minimalist Figma clone using Fabric.js and Liveblocks',
+  title: 'Canvas Board',
+  description: 'Cooperation tool clone using Fabric.js and Liveblocks',
 };
 
 export default function RootLayout({
@@ -21,7 +21,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={`${workSans.className} bg-primary-grey-200`}>
+      <body
+        className={`
+        ${montserrat.className}
+       bg-primary-graphite`}
+      >
         <Room>{children}</Room>
       </body>
     </html>

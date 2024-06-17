@@ -95,6 +95,13 @@ export const handleKeyDown = ({
   syncShapeInStorage: (shape: fabric.Object) => void;
   deleteShapeFromStorage: (id: string) => void;
 }) => {
+  const focusedElementType = document.activeElement?.tagName.toLowerCase();
+  const isInputFocused = focusedElementType === 'input';
+
+  // Ignore key events if an input field is focused
+  if (isInputFocused) {
+    return;
+  }
   // Check if the key pressed is ctrl/cmd + c (copy)
   if ((e?.ctrlKey || e?.metaKey) && e.keyCode === 67) {
     handleCopy(canvas);
