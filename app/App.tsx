@@ -47,7 +47,9 @@ export default function Page() {
   const isDrawing = useRef(false);
   const shapeRef = useRef<fabric.Object | null>(null);
   const selectedShapeRef = useRef<string | null>(null);
+
   const activeObjectRef = useRef<fabric.Object | null>(null);
+
   const imageInputRef = useRef<HTMLInputElement>(null);
   const isEditingRef = useRef(false);
   const [bgColor, setBgColor] = useState('#1f2731'); // Initial background color
@@ -94,6 +96,9 @@ export default function Page() {
     value: '',
     icon: '',
   });
+  const [selectedElement, setSelectedElement] = useState<ActiveElement>({
+    elementId: '',
+  });
 
   const deleteAllShapes = useMutation(({ storage }) => {
     const canvasObjects = storage.get('canvasObjects');
@@ -130,6 +135,7 @@ export default function Page() {
   }, []);
 
   const handleActiveElement = (elem: ActiveElement) => {
+    console.log(elem);
     setActiveElement(elem);
     selectedShapeRef.current = elem?.value as string;
     switch (elem?.value) {
@@ -231,7 +237,20 @@ export default function Page() {
         options,
         isEditingRef,
         setElementAttributes,
+        setSelectedElement,
       });
+    });
+    canvas.on('selection:updated', (options: any) => {
+      handleCanvasSelectionCreated({
+        options,
+        isEditingRef,
+        setElementAttributes,
+        setSelectedElement,
+      });
+    });
+
+    canvas.on('selection:cleared', () => {
+      setSelectedElement(null);
     });
 
     canvas.on('object:scaling', (options: any) => {
@@ -311,7 +330,8 @@ export default function Page() {
         <LeftSidebar
           allShapes={Array.from(canvasObjects)}
           fabricRef={fabricRef}
-          syncShapeInStorage={syncShapeInStorage}
+          selectedElement={selectedElement}
+          handleActiveElement={handleActiveElement}
         />
         <Live
           canvasRef={canvasRef}
@@ -322,6 +342,7 @@ export default function Page() {
         <RightSidebar
           elementAttributes={elementAttributes}
           setElementAttributes={setElementAttributes}
+          setSelectedElement={setSelectedElement}
           fabricRef={fabricRef}
           isEditingRef={isEditingRef}
           activeObjectRef={activeObjectRef}

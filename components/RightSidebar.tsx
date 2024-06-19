@@ -13,7 +13,7 @@ const RightSidebar = ({
   isEditingRef,
   activeObjectRef,
   syncShapeInStorage,
-
+  setSelectedElement,
   handleBackgroundColorChange,
 }: RightSidebarProps) => {
   const colorInputRef = useRef(null);
@@ -21,6 +21,7 @@ const RightSidebar = ({
 
   const handleInputChange = (property: string, value: string) => {
     if (!isEditingRef.current) isEditingRef.current = true;
+    isEditingRef.current = true;
     setElementAttributes((prev) => ({
       ...prev,
       [property]: value,
@@ -32,13 +33,18 @@ const RightSidebar = ({
       activeObjectRef,
       syncShapeInStorage,
     });
+    const activeObject = fabricRef.current?.getActiveObject();
+
+    if (activeObject) {
+      setSelectedElement({
+        elementId: activeObject.objectId, // or any other identifier
+      });
+    }
+    isEditingRef.current = false;
   };
+
   return (
     <section className='flex flex-col  bg-primary-graphite text-primary-grey-300 min-w-[200px] max-w-[200px] sticky right-[8px]  my-2 max-sm:hidden select-none rounded-lg'>
-      {/* <h3 className='px-5 pt-4 text-xs uppercase'>design</h3>
-      <span className='text-xs text-primary-grey-300 mt-3 px-5 border-b border-primary-grey-200 pb-4'>
-        Make changes to canvas as you like
-      </span> */}
       <CanvasColor handleBackgroundColorChange={handleBackgroundColorChange} />
       <Dimensions
         width={elementAttributes.width}

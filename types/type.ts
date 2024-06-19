@@ -97,6 +97,7 @@ export type RightSidebarProps = {
   activeObjectRef: React.RefObject<fabric.Object | null>;
   isEditingRef: React.MutableRefObject<boolean>;
   syncShapeInStorage: (obj: any) => void;
+  setSelectedElement: React.Dispatch<React.SetStateAction<Attributes>>;
   // setBgColor: React.Dispatch<React.SetStateAction>;
   handleBackgroundColorChange: (obj: any) => void;
 };
@@ -161,6 +162,7 @@ export type CanvasSelectionCreated = {
   options: fabric.IEvent;
   setElementAttributes: React.Dispatch<React.SetStateAction<Attributes>>;
   isEditingRef: React.MutableRefObject<boolean>;
+  setSelectedElement: React.Dispatch<React.SetStateAction<Attributes>>;
 };
 
 export type CanvasObjectScaling = {

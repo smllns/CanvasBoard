@@ -6,6 +6,7 @@ type Props = {
   attribute: string;
   placeholder: string;
   attributeType: string;
+
   handleInputChange: (property: string, value: string) => void;
 };
 
@@ -14,6 +15,7 @@ const Color = ({
   attribute,
   placeholder,
   attributeType,
+
   handleInputChange,
 }: Props) => (
   <div className='flex flex-col gap-3 p-3'>

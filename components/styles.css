@@ -6,8 +6,30 @@
 
 .normal-border:hover {
   border-width: 0.5px;
-  border-color: #4cb8c4;
+  border-color: #d3d3d380;
 }
+.normal-border.focused {
+  border-width: 0.5px;
+  border-color: #d3d3d380; /* Keep the border color when focused */
+}
+/* styles.css */
+.cross-icon {
+  display: none; /* Hide cross icon by default */
+}
+
+.group:hover .cross-icon,
+.group:focus-within .cross-icon {
+  display: inline-block; /* Show cross icon on parent hover or focus */
+}
+
+.cross-icon:hover {
+  filter: brightness(0) saturate(100%) invert(21%) sepia(100%) saturate(7458%) hue-rotate(349deg) brightness(91%)
+    contrast(108%);
+}
+.cross-icon.default {
+  filter: none;
+}
+
 .color-input {
   -webkit-appearance: none;
   -moz-appearance: none;

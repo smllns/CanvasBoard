@@ -292,14 +292,19 @@ export const handleCanvasSelectionCreated = ({
   options,
   isEditingRef,
   setElementAttributes,
+  setSelectedElement,
 }: CanvasSelectionCreated) => {
   // if user is editing manually, return
   if (isEditingRef.current) return;
 
   // if no element is selected, return
-  if (!options?.selected) return;
+  if (!options?.selected) {
+    return;
+  }
   // get the selected element
   const selectedElement = options?.selected[0] as fabric.Object;
+
+  setSelectedElement(selectedElement.objectId);
 
   // if only one element is selected, set element attributes
   if (selectedElement && options.selected.length === 1) {
