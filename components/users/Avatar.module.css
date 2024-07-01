@@ -4,8 +4,8 @@
   position: relative;
   border: 4px solid #fff;
   border-radius: 9999px;
-  width: 40px;
-  height: 40px;
+  width: 24px;
+  height: 24px;
   background-color: #9ca3af;
   margin-left: -0.75rem;
 }
@@ -13,7 +13,7 @@
 .avatar:before {
   content: attr(data-tooltip);
   position: absolute;
-  bottom: 100%;
+  bottom: -200%;
   opacity: 0;
   transition: opacity 0.15s ease;
   padding: 5px 10px;

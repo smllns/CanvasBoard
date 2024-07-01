@@ -20,11 +20,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en'>
+    <html lang='en' className='m-0 p-0'>
       <body
         className={`
         ${montserrat.className}
-       bg-primary-graphite`}
+       bg-primary-graphite p-0  m-0`}
       >
         <Room>{children}</Room>
       </body>

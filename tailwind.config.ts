@@ -26,10 +26,15 @@ const config = {
             100: '#2B303B',
             200: '#202731',
             300: '#C4D3ED',
+            400: '#DBDBDB99',
           },
           graphite: ' #161616',
           verygrey: '#101010',
         },
+      },
+      backgroundImage: {
+        'primary-gradient':
+          'linear-gradient(333.79deg, #4ABBC1 20.85%, #EAECC6 108.13%)',
       },
       keyframes: {
         'accordion-down': {

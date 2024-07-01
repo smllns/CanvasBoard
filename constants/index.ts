@@ -21,11 +21,11 @@ export const shapeElements = [
     name: 'Line',
     value: 'line',
   },
-  {
-    icon: './assets/image.svg',
-    name: 'Image',
-    value: 'image',
-  },
+  // {
+  //   icon: './assets/image.svg',
+  //   name: 'Image',
+  //   value: 'image',
+  // },
   {
     icon: './assets/freeform.svg',
     name: 'Free Drawing',
@@ -65,9 +65,79 @@ export const navElements = [
     name: 'Comments',
   },
 ];
+export const headNavElements = [
+  {
+    icon: './assets/select1.svg',
+    name: 'Select',
+    value: 'select',
+  },
+  {
+    icon: './assets/rectangle1.svg',
+    name: 'Rectangle',
+    value: shapeElements,
+  },
+  {
+    icon: './assets/text1.svg',
+    value: 'text',
+    name: 'Text',
+  },
+  {
+    icon: './assets/image1.svg',
+    name: 'Image',
+    value: 'image',
+  },
+  // {
+  //   icon: './assets/delete1.svg',
+  //   value: 'delete',
+  //   name: 'Delete',
+  // },
+  // {
+  //   icon: './assets/reset1.svg',
+  //   value: 'reset',
+  //   name: 'Reset',
+  // },
+  {
+    icon: './assets/comments1.svg',
+    value: 'comments',
+    name: 'Comments',
+  },
+];
+export const headShapeElements = [
+  {
+    icon: './assets/rectangle1.svg',
+    name: 'Rectangle',
+    value: 'rectangle',
+  },
+  {
+    icon: './assets/circle1.svg',
+    name: 'Circle',
+    value: 'circle',
+  },
+  {
+    icon: './assets/triangle1.svg',
+    name: 'Triangle',
+    value: 'triangle',
+  },
+  {
+    icon: './assets/line1.svg',
+    name: 'Line',
+    value: 'line',
+  },
+  // {
+  //   icon: './assets/image1.svg',
+  //   name: 'Image',
+  //   value: 'image',
+  //   text: '[i]',
+  // },
+  {
+    icon: './assets/freeform1.svg',
+    name: 'Free Drawing',
+    value: 'freeform',
+  },
+];
 
 export const defaultNavElement = {
-  icon: './assets/select.svg',
+  icon: './assets/select1.svg',
   name: 'Select',
   value: 'select',
 };

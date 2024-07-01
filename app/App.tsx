@@ -308,7 +308,7 @@ export default function Page() {
   }, [canvasObjects]);
 
   return (
-    <main className='h-screen overflow-hidden '>
+    <main className='h-screen overflow-hidden'>
       <Navbar
         activeElement={activeElement}
         handleActiveElement={handleActiveElement}
