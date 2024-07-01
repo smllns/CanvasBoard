@@ -21,11 +21,7 @@ export const shapeElements = [
     name: 'Line',
     value: 'line',
   },
-  // {
-  //   icon: './assets/image.svg',
-  //   name: 'Image',
-  //   value: 'image',
-  // },
+
   {
     icon: './assets/freeform.svg',
     name: 'Free Drawing',
@@ -86,16 +82,7 @@ export const headNavElements = [
     name: 'Image',
     value: 'image',
   },
-  // {
-  //   icon: './assets/delete1.svg',
-  //   value: 'delete',
-  //   name: 'Delete',
-  // },
-  // {
-  //   icon: './assets/reset1.svg',
-  //   value: 'reset',
-  //   name: 'Reset',
-  // },
+
   {
     icon: './assets/comments1.svg',
     value: 'comments',
@@ -123,12 +110,7 @@ export const headShapeElements = [
     name: 'Line',
     value: 'line',
   },
-  // {
-  //   icon: './assets/image1.svg',
-  //   name: 'Image',
-  //   value: 'image',
-  //   text: '[i]',
-  // },
+
   {
     icon: './assets/freeform1.svg',
     name: 'Free Drawing',
