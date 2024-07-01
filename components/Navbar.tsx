@@ -66,7 +66,7 @@ const Navbar = ({
                         alt={item.name}
                         // fill
                         className={isActive(item.value) ? 'invert' : ''}
-                        className='relative'
+                        // className='relative'
                         height={18}
                         width={18}
                       />
@@ -78,20 +78,20 @@ const Navbar = ({
                 </NewThread>
               ) : (
                 <Button className='relative w-5 h-5 object-contain bg-transparent border-none hover:bg-transparent'>
-                  {/* <div className='flex justify-center items-center  flex-col'> */}
-                  <Image
-                    src={item.icon}
-                    alt={item.name}
-                    // fill
-                    className={isActive(item.value) ? 'invert' : ''}
-                    className='relative'
-                    height={18}
-                    width={18}
-                  />
-                  {/* <p className=' text-primary-grey-400 size-1 text-[8px] absolute top-2'>
+                  <div className='flex justify-center items-center  flex-col'>
+                    <Image
+                      src={item.icon}
+                      alt={item.name}
+                      // fill
+                      className={isActive(item.value) ? 'invert' : ''}
+                      // className='relative'
+                      height={18}
+                      width={18}
+                    />
+                    {/* <p className=' text-primary-grey-400 size-1 text-[8px] absolute top-2'>
                     {item.text}
                   </p> */}
-                  {/* </div> */}
+                  </div>
                 </Button>
               )}
             </li>
