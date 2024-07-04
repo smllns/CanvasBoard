@@ -151,6 +151,9 @@ const Live = ({ canvasRef, undo, redo, backgroundColor }: Props) => {
         e.preventDefault();
       }
     };
+
+    window.addEventListener('keyup', onKeyUp);
+    window.addEventListener('keydown', onKeyDown);
     return () => {
       window.addEventListener('keyup', onKeyUp);
       window.addEventListener('keydown', onKeyDown);
