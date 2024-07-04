@@ -65,7 +65,13 @@ export const handleDelete = (
   deleteShapeFromStorage: (id: string) => void
 ) => {
   const activeObjects = canvas.getActiveObjects();
+
   if (!activeObjects || activeObjects.length === 0) return;
+  if (
+    activeObjects[0]?.type === 'i-text' &&
+    activeObjects[0]?.isEditing === true
+  )
+    return;
 
   if (activeObjects.length > 0) {
     activeObjects.forEach((obj: CustomFabricObject<any>) => {
