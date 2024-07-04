@@ -133,6 +133,7 @@ const Live = ({ canvasRef, undo, redo, backgroundColor }: Props) => {
 
   useEffect(() => {
     const onKeyUp = (e: KeyboardEvent) => {
+      if (document.activeElement?.tagName.toLowerCase() === 'textarea') return;
       if (e.key === '/') {
         setCursorState({
           mode: CursorMode.Chat,
