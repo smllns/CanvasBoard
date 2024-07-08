@@ -63,6 +63,9 @@ export type ActiveElement = {
   value: string;
   icon: string;
 } | null;
+export type SelectedElement = {
+  elementId: string;
+} | null;
 
 export interface CustomFabricObject<T extends fabric.Object>
   extends fabric.Object {
@@ -98,8 +101,13 @@ export type RightSidebarProps = {
   isEditingRef: React.MutableRefObject<boolean>;
   syncShapeInStorage: (obj: any) => void;
   setSelectedElement: React.Dispatch<React.SetStateAction<Attributes>>;
-  // setBgColor: React.Dispatch<React.SetStateAction>;
   handleBackgroundColorChange: (obj: any) => void;
+};
+export type LeftSidebarProps = {
+  allShapes: Array<ActiveElement>;
+  fabricRef: React.RefObject<fabric.Canvas | null>;
+  selectedElement: SelectedElement;
+  handleActiveElement: (obj: any) => void;
 };
 
 export type NavbarProps = {

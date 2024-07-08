@@ -41,9 +41,8 @@ const Live = ({
   });
   const [reaction, setReaction] = useState<Reaction[]>([]);
 
-  const [bgColor, setBgColor] = useState(backgroundColor); // Initial background color
+  const [bgColor, setBgColor] = useState(backgroundColor);
 
-  // Listen for changes to the background color in Liveblocks storage
   const backCol = useStorage((root) => root.bgColor);
 
   useEffect(() => {
@@ -216,7 +215,6 @@ const Live = ({
         className='h-full w-full flex flex-1 justify-center items-center relative'
         style={{ backgroundColor: backCol }}
       >
-        {/* <h1 className='text-2xl text-white '>Liveblocks figma clone</h1> */}
         <canvas ref={canvasRef} />
 
         {reaction.map((r) => (

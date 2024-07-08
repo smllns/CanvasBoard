@@ -20,7 +20,7 @@ import {
   initializeFabric,
   renderCanvas,
 } from '@/lib/canvas';
-import { ActiveElement, Attributes } from '@/types/type';
+import { ActiveElement, Attributes, SelectedElement } from '@/types/type';
 import { useMutation, useRedo, useStorage, useUndo } from '@/liveblocks.config';
 import { defaultNavElement } from '@/constants';
 import { handleDelete, handleKeyDown } from '@/lib/key-events';
@@ -91,7 +91,7 @@ export default function Page() {
     value: '',
     icon: '',
   });
-  const [selectedElement, setSelectedElement] = useState<ActiveElement>({
+  const [selectedElement, setSelectedElement] = useState<SelectedElement>({
     elementId: '',
   });
 

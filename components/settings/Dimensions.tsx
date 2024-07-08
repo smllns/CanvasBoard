@@ -1,12 +1,7 @@
 import { Label } from '../ui/label';
 import { Input } from '../ui/input';
-import { useState } from 'react';
-import '../styles.css'; // Import your CSS file
-
-const dimensionsOptions = [
-  { label: 'W:', property: 'width' },
-  { label: 'H:', property: 'height' },
-];
+import '../styles.css';
+import { dimensionsOptions } from '@/constants';
 
 type Props = {
   width: string;
@@ -21,15 +16,11 @@ const Dimensions = ({
   isEditingRef,
   handleInputChange,
 }: Props) => {
-  const [focusedInput, setFocusedInput] = useState<string | null>(null);
-
   const handleInputFocus = (property: string) => {
-    setFocusedInput(property);
-    isEditingRef.current = true; // Assuming you want to mark editing as true when input is focused
+    isEditingRef.current = true;
   };
 
   const handleInputBlur = () => {
-    setFocusedInput(null);
     isEditingRef.current = false;
   };
 

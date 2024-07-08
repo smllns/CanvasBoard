@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Label } from '../ui/label';
 import { useStorage } from '@/liveblocks.config';
-import '../styles.css'; // Import your CSS file
+import '../styles.css';
 
 type Props = {
   handleBackgroundColorChange: (obj: any) => void;

@@ -199,3 +199,7 @@ export const shortcuts = [
     name: 'Clear All',
   },
 ];
+export const dimensionsOptions = [
+  { label: 'W:', property: 'width' },
+  { label: 'H:', property: 'height' },
+];

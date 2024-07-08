@@ -37,7 +37,7 @@ const RightSidebar = ({
 
     if (activeObject) {
       setSelectedElement({
-        elementId: activeObject.objectId, // or any other identifier
+        elementId: activeObject.objectId,
       });
     }
     isEditingRef.current = false;

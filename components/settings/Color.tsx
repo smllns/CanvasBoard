@@ -1,5 +1,5 @@
 import { Label } from '../ui/label';
-import '../styles.css'; // Import your CSS file
+import '../styles.css';
 
 type Props = {
   inputRef: any;

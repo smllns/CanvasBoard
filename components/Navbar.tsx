@@ -49,7 +49,7 @@ const Navbar = ({
               }
               `}
             >
-              {/* If value is an array means it's a dropdown */}
+              {/* If value is an array it's a dropdown */}
               {Array.isArray(item.value) ? (
                 <ShapesMenu
                   item={item}

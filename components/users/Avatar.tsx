@@ -2,8 +2,6 @@ import React from 'react';
 import styles from './Avatar.module.css';
 import Image from 'next/image';
 
-const IMAGE_SIZE = 48;
-
 export function Avatar({
   name,
   otherStyles,

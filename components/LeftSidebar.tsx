@@ -2,15 +2,16 @@ import React, { useState, useMemo, useEffect } from 'react';
 import Image from 'next/image';
 import { getShapeInfo } from '@/lib/utils';
 import { getObjectById } from '@/lib/canvas';
-import './styles.css'; // Import your CSS file
+import './styles.css';
 import cross from '../public/assets/cross.svg';
+import { LeftSidebarProps } from '@/types/type';
 
 const LeftSidebar = ({
   allShapes,
   fabricRef,
   selectedElement,
   handleActiveElement,
-}) => {
+}: LeftSidebarProps) => {
   const deleting = { value: 'delete' };
   const [focusedShape, setFocusedShape] = useState<string | null>(null);
   const [hoveredShape, setHoveredShape] = useState<string | null>(null);
@@ -39,14 +40,12 @@ const LeftSidebar = ({
             const shapeId = shape[1]?.objectId;
 
             const handleClick = () => {
-              // Find the corresponding object on the canvas
               const objectId = shapeId;
               const fabricObject = getObjectById({
                 fabricRef: fabricRef.current,
                 objectId,
               });
 
-              // Select the object on the canvas
               if (fabricObject) {
                 fabricRef.current.setActiveObject(fabricObject);
                 fabricRef.current.requestRenderAll();
@@ -64,7 +63,7 @@ const LeftSidebar = ({
                 onBlur={() => setFocusedShape(null)}
                 onMouseEnter={() => handleMouseEnter(shapeId)}
                 onMouseLeave={handleMouseLeave}
-                tabIndex={0} // Make div focusable
+                tabIndex={0}
               >
                 <div className='flex flex-row items-center justify-center'>
                   <Image
@@ -89,7 +88,7 @@ const LeftSidebar = ({
                       : 'default'
                   }`}
                   onClick={(e) => {
-                    e.stopPropagation(); // Prevent triggering the parent div's onClick
+                    e.stopPropagation();
                     if (focusedShape === shapeId) {
                       handleActiveElement(deleting);
                     }

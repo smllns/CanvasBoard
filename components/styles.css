@@ -10,16 +10,16 @@
 }
 .normal-border.focused {
   border-width: 0.5px;
-  border-color: #d3d3d380; /* Keep the border color when focused */
+  border-color: #d3d3d380;
 }
-/* styles.css */
+
 .cross-icon {
-  display: none; /* Hide cross icon by default */
+  display: none;
 }
 
 .group:hover .cross-icon,
 .group:focus-within .cross-icon {
-  display: inline-block; /* Show cross icon on parent hover or focus */
+  display: inline-block;
 }
 
 .cross-icon:hover {
@@ -33,15 +33,11 @@
 .color-input {
   -webkit-appearance: none;
   -moz-appearance: none;
-  width: 19px; /* Adjust as needed */
-  height: 21px; /* Adjust as needed */
-  /* outline: none; */
-
+  width: 19px;
+  height: 21px;
   background-color: transparent;
   border: none;
-  /* border-radius: 3px; */
   padding: 0;
-  /* appearance: none; */
   cursor: pointer;
 }
 .color-input::-webkit-color-swatch {
@@ -53,10 +49,8 @@
   border: none;
 }
 .color-input:focus {
-  /* Remove default focus outline */
   background-color: transparent;
   border: none;
-  /* Set background to black on focus */
 }
 
 .input-custom::placeholder {
@@ -80,19 +74,17 @@
 }
 
 .input-border {
-  border: 1px solid transparent; /* Set an initial border to ensure transitions work */
-  transition: border-color 0.3s ease; /* Smooth transition for border color changes */
+  border: 1px solid transparent;
+  transition: border-color 0.3s ease;
 }
 
 .input-border.hovered {
-  border-color: #d3d3d380; /* Light gray border on hover */
+  border-color: #d3d3d380;
 }
 
 .input-border.focused {
-  border-color: #4cb8c480; /* Light blue-green border on focus */
+  border-color: #4cb8c480;
 }
-
-/* Styles for the select trigger and icon */
 
 .select-trigger {
   display: flex;
@@ -111,11 +103,11 @@
 }
 
 .select-trigger:hover {
-  border-color: #d3d3d380; /* Border color on hover and focus-within */
+  border-color: #d3d3d380;
 }
 
 .select-trigger.focus-within {
-  border-color: #4abbc1; /* Adjust border color specifically for focus within */
+  border-color: #4abbc1;
 }
 
 .select-icon {
