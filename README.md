@@ -49,6 +49,12 @@ The application is deployed on Vercel for optimal performance and scalability.
 - **[Fabric.js](http://fabricjs.com/)**: For canvas functionality.
 - **[Shadcn](https://ui.shadcn.com/)**: For UI components.
 
+## Author
+
+CookLab was created with care and dedication by Mariia Smolianskaia.
+
+Feel free to reach out to the author with any questions or feedback via email: marysmoly@gmail.com
+
 <!-- This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
