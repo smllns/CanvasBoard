@@ -44,10 +44,10 @@ The application is deployed on Vercel for optimal performance and scalability.
 
 ## Acknowledgements
 
-- **Liveblocks**: For real-time synchronization.
-- **Firebase**: For storage and backend support.
-- **Fabric.js**: For canvas functionality.
-- **Shadcn**: For UI components.
+- **[Liveblocks](https://liveblocks.io/)**: For real-time synchronization.
+- **[Firebase](https://firebase.google.com/)**: For storage and backend support.
+- **[Fabric.js](http://fabricjs.com/)**: For canvas functionality.
+- **[Shadcn](https://shadcn.dev/)**: For UI components.
 
 <!-- This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
