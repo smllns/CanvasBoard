@@ -14,19 +14,11 @@ const NewThreadCursor = ({ display }: { display: boolean }) => {
 
   useEffect(() => {
     const updatePosition = (e: MouseEvent) => {
-      // get canvas element
       const canvas = document.getElementById('canvas');
 
       if (canvas) {
-        /**
-         * getBoundingClientRect returns the size of an element and its position relative to the viewport
-         *
-         * getBoundingClientRect: https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect
-         */
         const canvasRect = canvas.getBoundingClientRect();
 
-        // check if the mouse is outside the canvas
-        // if so, hide the custom comment cursor
         if (
           e.clientX < canvasRect.left ||
           e.clientX > canvasRect.right ||
@@ -41,7 +33,6 @@ const NewThreadCursor = ({ display }: { display: boolean }) => {
         }
       }
 
-      // set the coordinates of the cursor
       setCoords({
         x: e.clientX,
         y: e.clientY,
@@ -70,7 +61,6 @@ const NewThreadCursor = ({ display }: { display: boolean }) => {
   }
 
   return (
-    // Portal.Root is used to render a component outside of its parent component
     <Portal.Root>
       <div
         className='pointer-events-none fixed left-0 top-0 h-9 w-9 cursor-grab select-none rounded-bl-full rounded-br-full rounded-tl-md rounded-tr-full bg-white shadow-2xl'
