@@ -25,9 +25,16 @@ type Props = {
   undo: () => void;
   redo: () => void;
   backgroundColor: string;
+  handleActiveElement: (element: ActiveElement) => void;
 };
 
-const Live = ({ canvasRef, undo, redo, backgroundColor }: Props) => {
+const Live = ({
+  canvasRef,
+  undo,
+  redo,
+  backgroundColor,
+  handleActiveElement,
+}: Props) => {
   const [{ cursor }, updateMyPresence] = useMyPresence();
   const [cursorState, setCursorState] = useState<CursorState>({
     mode: CursorMode.Hidden,
@@ -188,6 +195,10 @@ const Live = ({ canvasRef, undo, redo, backgroundColor }: Props) => {
         break;
       case 'Redo':
         redo();
+        break;
+      case 'Clear All':
+        const element = { value: 'reset' };
+        handleActiveElement(element);
         break;
       default:
         break;

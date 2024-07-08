@@ -49,7 +49,7 @@ const Navbar = ({
               }
               `}
             >
-              {/* If value is an array means it's a nav element with sub options i.e., dropdown */}
+              {/* If value is an array means it's a dropdown */}
               {Array.isArray(item.value) ? (
                 <ShapesMenu
                   item={item}
@@ -57,22 +57,16 @@ const Navbar = ({
                   handleActiveElement={handleActiveElement}
                 />
               ) : item?.value === 'comments' ? (
-                // If value is comments, trigger the NewThread component
                 <NewThread>
                   <Button className='relative w-5 h-5 object-contain bg-transparent border-none hover:bg-transparent'>
                     <div className='flex justify-center items-center  flex-col'>
                       <Image
                         src={item.icon}
                         alt={item.name}
-                        // fill
                         className={isActive(item.value) ? 'invert' : ''}
-                        // className='relative'
                         height={18}
                         width={18}
                       />
-                      {/* <p className=' text-primary-grey-400 size-1 text-[8px] absolute top-2'>
-                        {item.text}
-                      </p> */}
                     </div>
                   </Button>
                 </NewThread>
@@ -82,15 +76,10 @@ const Navbar = ({
                     <Image
                       src={item.icon}
                       alt={item.name}
-                      // fill
                       className={isActive(item.value) ? 'invert' : ''}
-                      // className='relative'
                       height={18}
                       width={18}
                     />
-                    {/* <p className=' text-primary-grey-400 size-1 text-[8px] absolute top-2'>
-                    {item.text}
-                  </p> */}
                   </div>
                 </Button>
               )}

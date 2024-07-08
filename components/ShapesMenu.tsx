@@ -34,7 +34,6 @@ const ShapesMenu = ({
               className={
                 isDropdownElem ? 'invert relative pb-1' : 'relative pb-1'
               }
-              // className='relative pb-1'
               height={18}
               width={18}
             />

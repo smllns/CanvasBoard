@@ -47,18 +47,14 @@ export default function Page() {
   const isDrawing = useRef(false);
   const shapeRef = useRef<fabric.Object | null>(null);
   const selectedShapeRef = useRef<string | null>(null);
-
   const activeObjectRef = useRef<fabric.Object | null>(null);
-
   const imageInputRef = useRef<HTMLInputElement>(null);
   const isEditingRef = useRef(false);
-  const [bgColor, setBgColor] = useState('#1f2731'); // Initial background color
-
+  const [bgColor, setBgColor] = useState('#1f2731');
   const canvasObjects = useStorage((root) => root.canvasObjects);
   const isGrabbing = useRef(false);
   const lastPosX = useRef(0);
   const lastPosY = useRef(0);
-
   const [elementAttributes, setElementAttributes] = useState<Attributes>({
     width: '',
     height: '',
@@ -73,7 +69,6 @@ export default function Page() {
     storage.set('bgColor', color);
   }, []);
 
-  // Update background color and sync with Liveblocks
   const handleBackgroundColorChange = (color) => {
     setBgColor(color);
     syncBackgroundColor(color);
@@ -103,10 +98,6 @@ export default function Page() {
   const deleteAllShapes = useMutation(({ storage }) => {
     const canvasObjects = storage.get('canvasObjects');
     if (!canvasObjects || canvasObjects.size === 0) return true;
-
-    // for (const [key, value] of canvasObjects.entries()) {
-    //   canvasObjects.delete(key);
-    // }
     for (const [objectId, object] of canvasObjects.entries()) {
       console.log(object);
       // Check if the object has an image URL
@@ -125,7 +116,6 @@ export default function Page() {
   const deleteShapeFromStorage = useMutation(({ storage }, objectId) => {
     const canvasObjects = storage.get('canvasObjects');
     const imageUrl = canvasObjects.get(objectId)?.src;
-
     // Delete the file from Firebase Storage if the image URL exists
     if (imageUrl) {
       const storageRef = ref(store, imageUrl);
@@ -160,8 +150,9 @@ export default function Page() {
     }
   };
 
+  //event listeners for most of the events on canvas
+
   useEffect(() => {
-    // console.log(isGrabbing);
     const canvas = initializeFabric({
       canvasRef,
       fabricRef,
@@ -338,6 +329,7 @@ export default function Page() {
           undo={undo}
           redo={redo}
           backgroundColor={bgColor}
+          handleActiveElement={handleActiveElement}
         />
         <RightSidebar
           elementAttributes={elementAttributes}

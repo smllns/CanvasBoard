@@ -11,7 +11,7 @@ const montserrat = Montserrat({
 
 export const metadata: Metadata = {
   title: 'Canvas Board',
-  description: 'Cooperation tool clone using Fabric.js and Liveblocks',
+  description: 'Cooperation tool 🤍',
 };
 
 export default function RootLayout({

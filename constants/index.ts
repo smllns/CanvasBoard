@@ -29,38 +29,6 @@ export const shapeElements = [
   },
 ];
 
-export const navElements = [
-  {
-    icon: './assets/select.svg',
-    name: 'Select',
-    value: 'select',
-  },
-  {
-    icon: './assets/rectangle.svg',
-    name: 'Rectangle',
-    value: shapeElements,
-  },
-  {
-    icon: './assets/text.svg',
-    value: 'text',
-    name: 'Text',
-  },
-  {
-    icon: './assets/delete.svg',
-    value: 'delete',
-    name: 'Delete',
-  },
-  {
-    icon: './assets/reset.svg',
-    value: 'reset',
-    name: 'Reset',
-  },
-  {
-    icon: './assets/comments.svg',
-    value: 'comments',
-    name: 'Comments',
-  },
-];
 export const headNavElements = [
   {
     icon: './assets/select1.svg',
@@ -123,11 +91,6 @@ export const defaultNavElement = {
   name: 'Select',
   value: 'select',
 };
-
-// export const directionOptions = [
-//   { label: 'Bring to Front', value: 'front', icon: '/assets/front.svg' },
-//   { label: 'Send to Back', value: 'back', icon: '/assets/back.svg' },
-// ];
 
 export const fontFamilyOptions = [
   { value: 'Helvetica', label: 'Helvetica' },
@@ -210,23 +173,6 @@ export const fontWeightOptions = [
   },
 ];
 
-export const alignmentOptions = [
-  { value: 'left', label: 'Align Left', icon: '/assets/align-left.svg' },
-  {
-    value: 'horizontalCenter',
-    label: 'Align Horizontal Center',
-    icon: './assets/align-horizontal-center.svg',
-  },
-  { value: 'right', label: 'Align Right', icon: '/assets/align-right.svg' },
-  { value: 'top', label: 'Align Top', icon: '/assets/align-top.svg' },
-  {
-    value: 'verticalCenter',
-    label: 'Align Vertical Center',
-    icon: './assets/align-vertical-center.svg',
-  },
-  { value: 'bottom', label: 'Align Bottom', icon: '/assets/align-bottom.svg' },
-];
-
 export const shortcuts = [
   {
     key: '1',
@@ -247,5 +193,9 @@ export const shortcuts = [
     key: '4',
     name: 'Reactions',
     shortcut: 'E',
+  },
+  {
+    key: '5',
+    name: 'Clear All',
   },
 ];
