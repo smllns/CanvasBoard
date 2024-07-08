@@ -6,9 +6,7 @@ import { CustomFabricObject } from '@/types/type';
 export const handleCopy = (canvas: fabric.Canvas) => {
   const activeObjects = canvas.getActiveObjects();
   if (activeObjects.length > 0) {
-    // Serialize the selected objects
     const serializedObjects = activeObjects.map((obj) => obj.toObject());
-    // Store the serialized objects in the clipboard
     localStorage.setItem('clipboard', JSON.stringify(serializedObjects));
   }
   console.log(activeObjects);
@@ -24,7 +22,6 @@ export const handlePaste = (
     return;
   }
 
-  // Retrieve serialized objects from the clipboard
   const clipboardData = localStorage.getItem('clipboard');
   console.log(clipboardData);
   if (clipboardData) {
@@ -34,7 +31,6 @@ export const handlePaste = (
         parsedObjects,
         (enlivenedObjects: fabric.Object[]) => {
           const newObjects = enlivenedObjects.map((obj) => {
-            // Offset the pasted objects to avoid overlap with existing objects
             obj.set({
               left: (obj.left || 0) + 20,
               top: (obj.top || 0) + 20,
@@ -44,7 +40,6 @@ export const handlePaste = (
             return obj;
           });
 
-          // Add the new objects to the canvas only once
           newObjects.forEach((newObj) => {
             canvas.add(newObj);
             syncShapeInStorage(newObj);
@@ -85,7 +80,6 @@ export const handleDelete = (
   canvas.requestRenderAll();
 };
 
-// create a handleKeyDown function that listen to different keydown events
 export const handleKeyDown = ({
   e,
   canvas,
@@ -104,41 +98,41 @@ export const handleKeyDown = ({
   const focusedElementType = document.activeElement?.tagName.toLowerCase();
   const isInputFocused = focusedElementType === 'input';
 
-  // Ignore key events if an input field is focused
   if (isInputFocused) {
     return;
   }
-  // Check if the key pressed is ctrl/cmd + c (copy)
+  //ctrl/cmd + c (copy)
   if ((e?.ctrlKey || e?.metaKey) && e.keyCode === 67) {
     handleCopy(canvas);
   }
 
-  // Check if the key pressed is ctrl/cmd + v (paste)
+  // ctrl/cmd + v (paste)
   if ((e?.ctrlKey || e?.metaKey) && e.keyCode === 86) {
     handlePaste(canvas, syncShapeInStorage);
   }
 
-  // Check if the key pressed is delete/backspace (delete)
+  //  delete/backspace (delete)
   if (e.keyCode === 8 || e.keyCode === 46) {
     handleDelete(canvas, deleteShapeFromStorage);
   }
 
-  // check if the key pressed is ctrl/cmd + x (cut)
+  // ctrl/cmd + x (cut)
   if ((e?.ctrlKey || e?.metaKey) && e.keyCode === 88) {
     handleCopy(canvas);
     handleDelete(canvas, deleteShapeFromStorage);
   }
 
-  // check if the key pressed is ctrl/cmd + z (undo)
+  //  ctrl/cmd + z (undo)
   if ((e?.ctrlKey || e?.metaKey) && e.keyCode === 90) {
     undo();
   }
 
-  // check if the key pressed is ctrl/cmd + y (redo)
+  //  ctrl/cmd + y (redo)
   if ((e?.ctrlKey || e?.metaKey) && e.keyCode === 89) {
     redo();
   }
 
+  //forward slash
   if (e.keyCode === 191 && !e.shiftKey) {
     e.preventDefault();
   }
