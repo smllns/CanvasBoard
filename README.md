@@ -4,6 +4,8 @@
 
 It is an online canvas board where multiple users can cooperate in real-time, enabling seamless collaboration on creative projects.
 
+![App Preview](https://github.com/smllns/CanvasBoard/blob/main/public/assets/board-example.png?raw=true)
+
 ## Features
 
 - **Real-time Collaboration**: Built with Liveblocks, ensuring all user actions are instantly visible to everyone.
