@@ -51,7 +51,7 @@ The application is deployed on Vercel for optimal performance and scalability.
 
 ## Author
 
-CookLab was created with care and dedication by Mariia Smolianskaia.
+Canvas Board was created with care and dedication by Mariia Smolianskaia.
 
 Feel free to reach out to the author with any questions or feedback via email: marysmoly@gmail.com
 
