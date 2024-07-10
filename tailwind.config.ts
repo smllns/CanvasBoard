@@ -27,9 +27,12 @@ const config = {
             200: '#202731',
             300: '#C4D3ED',
             400: '#DBDBDB99',
+            500: '#9E9E9E',
           },
           graphite: ' #161616',
           verygrey: '#101010',
+          aqua: '#4ABBC1',
+          aquatwo: '#4ABBC1',
         },
       },
       backgroundImage: {

@@ -27,6 +27,7 @@ import { handleDelete, handleKeyDown } from '@/lib/key-events';
 import { handleImageUpload } from '@/lib/shapes';
 import { initializeApp } from 'firebase/app';
 import { deleteObject, getStorage, ref } from 'firebase/storage';
+import Popup from '@/components/Popup';
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -64,6 +65,7 @@ export default function Page() {
     fill: '#aabbcc',
     stroke: '#aabbcc',
   });
+  const [showPopup, setShowPopup] = useState(false); // State to control popup visibility
 
   const syncBackgroundColor = useMutation(({ storage }, color) => {
     storage.set('bgColor', color);
@@ -125,7 +127,6 @@ export default function Page() {
   }, []);
 
   const handleActiveElement = (elem: ActiveElement) => {
-    console.log(elem);
     setActiveElement(elem);
     selectedShapeRef.current = elem?.value as string;
     switch (elem?.value) {
@@ -294,6 +295,26 @@ export default function Page() {
     }
   }, [backCol, color]);
 
+  const handleClosePopup = () => {
+    setShowPopup(false);
+  };
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 640) {
+        setShowPopup(true);
+      } else {
+        setShowPopup(false);
+      }
+    };
+
+    handleResize(); // Call it initially
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   useEffect(() => {
     renderCanvas({ fabricRef, canvasObjects, activeObjectRef });
   }, [canvasObjects]);
@@ -318,6 +339,7 @@ export default function Page() {
         className='flex h-full flex-row'
         style={{ backgroundColor: color }}
       >
+        {showPopup && <Popup onClose={handleClosePopup} />}
         <LeftSidebar
           allShapes={Array.from(canvasObjects)}
           fabricRef={fabricRef}
