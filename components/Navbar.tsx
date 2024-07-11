@@ -23,7 +23,7 @@ const Navbar = ({
       value.some((val) => val?.value === activeElement?.value));
 
   return (
-    <nav className='flex select-none items-center justify-between gap-4 bg-primary-graphite px-9  text-white h-[48px]'>
+    <nav className='flex select-none items-center justify-between gap-4 bg-primary-graphite px-9  text-white h-[48px] '>
       <div className='flex items-center gap-[77px] h-[48px]'>
         <Image
           src='/assets/logo.svg'
@@ -31,7 +31,7 @@ const Navbar = ({
           width={131.79}
           height={29}
         />
-        <ul className='flex flex-row h-full items-center overflow-hidden px-0 m-0'>
+        <ul className='flex flex-row h-full items-center overflow-hidden px-0 m-0 max-sm:hidden'>
           {headNavElements.map((item: ActiveElement | any) => (
             <li
               key={item.name}
