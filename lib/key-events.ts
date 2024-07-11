@@ -9,7 +9,6 @@ export const handleCopy = (canvas: fabric.Canvas) => {
     const serializedObjects = activeObjects.map((obj) => obj.toObject());
     localStorage.setItem('clipboard', JSON.stringify(serializedObjects));
   }
-  console.log(activeObjects);
   return activeObjects;
 };
 
@@ -22,7 +21,6 @@ export const handlePaste = (
     return;
   }
   const clipboardData = localStorage.getItem('clipboard');
-  console.log(clipboardData);
   if (clipboardData) {
     try {
       const parsedObjects = JSON.parse(clipboardData);
