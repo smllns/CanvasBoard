@@ -1,3 +1,5 @@
+//main controller of the app: holds important canvas event listeners and renders other components
+
 'use client';
 import { fabric } from 'fabric';
 import LeftSidebar from '@/components/LeftSidebar';
@@ -65,8 +67,9 @@ export default function Page() {
     fill: '#aabbcc',
     stroke: '#aabbcc',
   });
-  const [showPopup, setShowPopup] = useState(false); // State to control popup visibility
+  const [showPopup, setShowPopup] = useState(false);
 
+  //canvas background color functions
   const syncBackgroundColor = useMutation(({ storage }, color) => {
     storage.set('bgColor', color);
   }, []);
@@ -75,13 +78,11 @@ export default function Page() {
     setBgColor(color);
     syncBackgroundColor(color);
   };
-
+  //function for synchronizing canvas objects to all users
   const syncShapeInStorage = useMutation(({ storage }, object) => {
     if (!object) return;
-
     const { objectId, zIndex } = object;
     const shapeData = object.toJSON();
-
     shapeData.objectId = objectId;
     shapeData.zIndex = zIndex;
     const canvasObjects = storage.get('canvasObjects');
@@ -97,19 +98,15 @@ export default function Page() {
     elementId: '',
   });
 
+  //functions for deleting objects from canvas/storage
   const deleteAllShapes = useMutation(({ storage }) => {
     const canvasObjects = storage.get('canvasObjects');
     if (!canvasObjects || canvasObjects.size === 0) return true;
     for (const [objectId, object] of canvasObjects.entries()) {
-      console.log(object);
-      // Check if the object has an image URL
       if (object.src) {
-        // Create a reference to the corresponding file in Firebase Storage
         const storageRef = ref(store, object.src);
-        // Delete the file from Firebase Storage
         deleteObject(storageRef);
       }
-      // Delete the object from canvasObjects
       canvasObjects.delete(objectId);
     }
     return canvasObjects.size === 0;
@@ -118,7 +115,6 @@ export default function Page() {
   const deleteShapeFromStorage = useMutation(({ storage }, objectId) => {
     const canvasObjects = storage.get('canvasObjects');
     const imageUrl = canvasObjects.get(objectId)?.src;
-    // Delete the file from Firebase Storage if the image URL exists
     if (imageUrl) {
       const storageRef = ref(store, imageUrl);
       deleteObject(storageRef);
@@ -152,7 +148,6 @@ export default function Page() {
   };
 
   //event listeners for most of the events on canvas
-
   useEffect(() => {
     const canvas = initializeFabric({
       canvasRef,
@@ -295,6 +290,7 @@ export default function Page() {
     }
   }, [backCol, color]);
 
+  //showing popup window on smaller screens
   const handleClosePopup = () => {
     setShowPopup(false);
   };

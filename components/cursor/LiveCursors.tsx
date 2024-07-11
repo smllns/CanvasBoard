@@ -7,7 +7,6 @@ const LiveCursors = () => {
   const others = useOthers();
   return others.map(({ connectionId, presence }) => {
     if (!presence?.cursor) return null;
-
     return (
       <Cursor
         key={connectionId}

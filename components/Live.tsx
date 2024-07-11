@@ -7,7 +7,7 @@ import {
 import LiveCursors from './cursor/LiveCursors';
 import { useCallback, useEffect, useState } from 'react';
 import CursorChat from './cursor/CursorChat';
-import { CursorMode, CursorState, Reaction } from '@/types/type';
+import { CursorMode, CursorState, LiveProps, Reaction } from '@/types/type';
 import ReactionSelector from './reaction/ReactionButton';
 import FlyingReaction from './reaction/FlyingReaction';
 import useInterval from '@/hooks/useInterval';
@@ -20,31 +20,20 @@ import {
 } from '@/components/ui/context-menu';
 import { shortcuts } from '@/constants';
 
-type Props = {
-  canvasRef: React.MutableRefObject<HTMLCanvasElement | null>;
-  undo: () => void;
-  redo: () => void;
-  backgroundColor: string;
-  handleActiveElement: (element: ActiveElement) => void;
-};
-
 const Live = ({
   canvasRef,
   undo,
   redo,
   backgroundColor,
   handleActiveElement,
-}: Props) => {
+}: LiveProps) => {
   const [{ cursor }, updateMyPresence] = useMyPresence();
   const [cursorState, setCursorState] = useState<CursorState>({
     mode: CursorMode.Hidden,
   });
   const [reaction, setReaction] = useState<Reaction[]>([]);
-
   const [bgColor, setBgColor] = useState(backgroundColor);
-
   const backCol = useStorage((root) => root.bgColor);
-
   useEffect(() => {
     if (!backCol) return;
     if (backCol !== backgroundColor) {
@@ -93,11 +82,9 @@ const Live = ({
 
   const handlePointerMove = useCallback((event: React.PointerEvent) => {
     event.preventDefault();
-
     if (cursor == null || cursorState.mode !== CursorMode.ReactionSelector) {
       const x = event.clientX - event.currentTarget.getBoundingClientRect().x;
       const y = event.clientY - event.currentTarget.getBoundingClientRect().y;
-
       updateMyPresence({ cursor: { x, y } });
     }
   }, []);
@@ -114,9 +101,7 @@ const Live = ({
     (event: React.PointerEvent) => {
       const x = event.clientX - event.currentTarget.getBoundingClientRect().x;
       const y = event.clientY - event.currentTarget.getBoundingClientRect().y;
-
       updateMyPresence({ cursor: { x, y } });
-
       setCursorState((state: CursorState) =>
         cursorState.mode === CursorMode.Reaction
           ? { ...state, isPressed: true }

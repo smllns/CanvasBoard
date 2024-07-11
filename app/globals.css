@@ -1,3 +1,5 @@
+/* global css rules  */
+
 @tailwind base
 @tailwind components;
 @tailwind utilities;

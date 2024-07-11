@@ -5,7 +5,6 @@ import * as Portal from '@radix-ui/react-portal';
 
 const DEFAULT_CURSOR_POSITION = -10000;
 
-// display a custom cursor when placing a new thread
 const NewThreadCursor = ({ display }: { display: boolean }) => {
   const [coords, setCoords] = useState({
     x: DEFAULT_CURSOR_POSITION,

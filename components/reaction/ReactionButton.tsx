@@ -1,4 +1,5 @@
 import React from 'react';
+import { emojis } from '@/constants';
 
 type Props = {
   setReaction: (reaction: string) => void;
@@ -7,15 +8,12 @@ type Props = {
 export default function ReactionSelector({ setReaction }: Props) {
   return (
     <div
-      className='absolute bottom-40 left-0 right-0 mx-auto w-fit  transform rounded-full bg-white px-2'
+      className='absolute bottom-40 left-0 right-0 mx-auto w-fit  transform rounded-full bg-primary-graphite px-2'
       onPointerMove={(e) => e.stopPropagation()}
     >
-      <ReactionButton reaction='👍' onSelect={setReaction} />
-      <ReactionButton reaction='🔥' onSelect={setReaction} />
-      <ReactionButton reaction='🩷' onSelect={setReaction} />
-      <ReactionButton reaction='👀' onSelect={setReaction} />
-      <ReactionButton reaction='😱' onSelect={setReaction} />
-      <ReactionButton reaction='💩' onSelect={setReaction} />
+      {emojis.map((emoji) => (
+        <ReactionButton key={emoji} reaction={emoji} onSelect={setReaction} />
+      ))}
     </div>
   );
 }

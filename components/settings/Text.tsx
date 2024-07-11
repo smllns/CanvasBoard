@@ -3,7 +3,6 @@ import {
   fontSizeOptions,
   fontWeightOptions,
 } from '@/constants';
-
 import {
   Select,
   SelectContent,
@@ -11,6 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '../ui/select';
+import { SelectProps, TextProps } from '@/types/type';
 
 const selectConfigs = [
   {
@@ -25,13 +25,6 @@ const selectConfigs = [
   },
   { property: 'fontSize', placeholder: '30', options: fontSizeOptions },
 ];
-
-type TextProps = {
-  fontFamily: string;
-  fontSize: string;
-  fontWeight: string;
-  handleInputChange: (property: string, value: string) => void;
-};
 
 const Text = ({
   fontFamily,
@@ -50,7 +43,6 @@ const Text = ({
         fontFamily,
         handleInputChange,
       })}
-
       <div className='flex gap-2'>
         {selectConfigs.slice(1).map((config) =>
           RenderSelect({
@@ -66,25 +58,13 @@ const Text = ({
   </div>
 );
 
-type Props = {
-  config: {
-    property: string;
-    placeholder: string;
-    options: { label: string; value: string }[];
-  };
-  fontSize: string;
-  fontWeight: string;
-  fontFamily: string;
-  handleInputChange: (property: string, value: string) => void;
-};
-
 const RenderSelect = ({
   config,
   fontSize,
   fontWeight,
   fontFamily,
   handleInputChange,
-}: Props) => (
+}: SelectProps) => (
   <Select
     key={config.property}
     onValueChange={(value) => handleInputChange(config.property, value)}

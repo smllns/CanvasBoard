@@ -2,20 +2,14 @@ import { Label } from '../ui/label';
 import { Input } from '../ui/input';
 import '../styles.css';
 import { dimensionsOptions } from '@/constants';
-
-type Props = {
-  width: string;
-  height: string;
-  isEditingRef: React.MutableRefObject<boolean>;
-  handleInputChange: (property: string, value: string) => void;
-};
+import { DimensionsProps } from '@/types/type';
 
 const Dimensions = ({
   width,
   height,
   isEditingRef,
   handleInputChange,
-}: Props) => {
+}: DimensionsProps) => {
   const handleInputFocus = (property: string) => {
     isEditingRef.current = true;
   };

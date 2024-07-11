@@ -177,6 +177,86 @@ export type CanvasObjectScaling = {
   options: fabric.IEvent;
   setElementAttributes: React.Dispatch<React.SetStateAction<Attributes>>;
 };
+export type CanvasResize = {
+  fabricRef: React.MutableRefObject<fabric.Canvas | null>;
+};
+export type CanvasZoom = {
+  options: fabric.IEvent & { e: WheelEvent };
+  canvas: fabric.Canvas | null;
+};
+export type CanvasMoving = {
+  options: fabric.IEvent;
+  canvas: fabric.Canvas;
+  isGrabbing: React.MutableRefObject<boolean>;
+  lastPosX: React.MutableRefObject<number>;
+  lastPosY: React.MutableRefObject<number>;
+  isDrawing: React.MutableRefObject<boolean>;
+  selectedShapeRef: any;
+  shapeRef: any;
+  syncShapeInStorage: (shape: fabric.Object) => void;
+};
+export type CanvasGrabDown = {
+  options: fabric.IEvent;
+  canvas: fabric.Canvas;
+  isGrabbing: React.MutableRefObject<boolean>;
+  lastPosX: React.MutableRefObject<number>;
+  lastPosY: React.MutableRefObject<number>;
+};
+export type CanvasGrabMove = {
+  e: fabric.IEvent;
+  canvas: fabric.Canvas;
+  isGrabbing: React.MutableRefObject<boolean>;
+  lastPosX: React.MutableRefObject<number>;
+  lastPosY: React.MutableRefObject<number>;
+};
+export type HandlingKeyDown = {
+  e: KeyboardEvent;
+  canvas: fabric.Canvas | any;
+  undo: () => void;
+  redo: () => void;
+  syncShapeInStorage: (shape: fabric.Object) => void;
+  deleteShapeFromStorage: (id: string) => void;
+};
+export type ColorProps = {
+  inputRef: any;
+  attribute: string;
+  placeholder: string;
+  attributeType: string;
+  handleInputChange: (property: string, value: string) => void;
+};
+export type DimensionsProps = {
+  width: string;
+  height: string;
+  isEditingRef: React.MutableRefObject<boolean>;
+  handleInputChange: (property: string, value: string) => void;
+};
+
+export type TextProps = {
+  fontFamily: string;
+  fontSize: string;
+  fontWeight: string;
+  handleInputChange: (property: string, value: string) => void;
+};
+
+export type SelectProps = {
+  config: {
+    property: string;
+    placeholder: string;
+    options: { label: string; value: string }[];
+  };
+  fontSize: string;
+  fontWeight: string;
+  fontFamily: string;
+  handleInputChange: (property: string, value: string) => void;
+};
+
+export type LiveProps = {
+  canvasRef: React.MutableRefObject<HTMLCanvasElement | null>;
+  undo: () => void;
+  redo: () => void;
+  backgroundColor: string;
+  handleActiveElement: (element: ActiveElement) => void;
+};
 
 export type RenderCanvas = {
   fabricRef: React.MutableRefObject<fabric.Canvas | null>;

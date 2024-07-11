@@ -203,3 +203,5 @@ export const dimensionsOptions = [
   { label: 'W:', property: 'width' },
   { label: 'H:', property: 'height' },
 ];
+
+export const emojis = ['👍', '🔥', '🩷', '👀', '😱', '💩'];

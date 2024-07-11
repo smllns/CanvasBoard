@@ -2,10 +2,8 @@
 
 import Image from 'next/image';
 import { memo } from 'react';
-
 import { headNavElements } from '@/constants';
 import { ActiveElement, NavbarProps } from '@/types/type';
-
 import { Button } from './ui/button';
 import ShapesMenu from './ShapesMenu';
 import ActiveUsers from './users/ActiveUsers';
@@ -59,7 +57,6 @@ const Navbar = ({
               ) : item?.value === 'comments' ? (
                 <NewThread>
                   <Button className='relative w-5 h-5 object-contain bg-transparent border-none hover:bg-transparent'>
-                    {/* <div className='flex justify-center items-center  flex-col'> */}
                     <Image
                       src={item.icon}
                       alt={item.name}
@@ -67,12 +64,10 @@ const Navbar = ({
                       height={18}
                       width={18}
                     />
-                    {/* </div> */}
                   </Button>
                 </NewThread>
               ) : (
                 <Button className='relative w-5 h-5 object-contain bg-transparent border-none hover:bg-transparent'>
-                  {/* <div className='flex justify-center items-center  flex-col'> */}
                   <Image
                     src={item.icon}
                     alt={item.name}
@@ -80,7 +75,6 @@ const Navbar = ({
                     height={18}
                     width={18}
                   />
-                  {/* </div> */}
                 </Button>
               )}
             </li>

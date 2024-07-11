@@ -1,23 +1,14 @@
 import { Label } from '../ui/label';
 import '../styles.css';
-
-type Props = {
-  inputRef: any;
-  attribute: string;
-  placeholder: string;
-  attributeType: string;
-
-  handleInputChange: (property: string, value: string) => void;
-};
+import { ColorProps } from '@/types/type';
 
 const Color = ({
   inputRef,
   attribute,
   placeholder,
   attributeType,
-
   handleInputChange,
-}: Props) => (
+}: ColorProps) => (
   <div className='flex flex-col gap-3 p-3'>
     <h3 className=' px-3 text-xs font-medium uppercase text-[#9E9E9E]'>
       {placeholder}

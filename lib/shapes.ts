@@ -2,13 +2,7 @@ import { fabric } from 'fabric';
 import { v4 as uuidv4 } from 'uuid';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { store } from '../app/App';
-
-import {
-  CustomFabricObject,
-  ElementDirection,
-  ImageUpload,
-  ModifyShape,
-} from '@/types/type';
+import { CustomFabricObject, ImageUpload, ModifyShape } from '@/types/type';
 
 export const createRectangle = (pointer: PointerEvent) => {
   const rect = new fabric.Rect({
@@ -19,7 +13,6 @@ export const createRectangle = (pointer: PointerEvent) => {
     fill: '#aabbcc',
     objectId: uuidv4(),
   } as CustomFabricObject<fabric.Rect>);
-
   return rect;
 };
 
@@ -86,7 +79,6 @@ export const createSpecificShape = (
 
     case 'text':
       return createText(pointer, 'Tap to Type');
-
     default:
       return null;
   }
@@ -99,15 +91,11 @@ export const handleImageUpload = async ({
   syncShapeInStorage,
 }: ImageUpload) => {
   const reader = new FileReader();
-
   reader.onload = async () => {
     try {
       const storageRef = ref(store, `images/${file.name}`);
       await uploadBytes(storageRef, file);
-
       const imageUrl = await getDownloadURL(storageRef);
-      console.log(imageUrl);
-
       fabric.Image.fromURL(imageUrl, (fabricImage) => {
         fabricImage.scaleToWidth(200);
         fabricImage.scaleToHeight(200);
@@ -115,24 +103,18 @@ export const handleImageUpload = async ({
           objectId: uuidv4(),
           imageUrl: imageUrl,
         });
-
         canvas.current.add(fabricImage);
-
         shapeRef.current = fabricImage;
-
         syncShapeInStorage(fabricImage);
-
         canvas.current.requestRenderAll();
       });
     } catch (error) {
       console.error('Error uploading image:', error);
     }
   };
-
   reader.onerror = (error) => {
     console.error('Error reading file:', error);
   };
-
   reader.readAsDataURL(file);
 };
 
@@ -145,7 +127,6 @@ export const createShape = (
     canvas.isDrawingMode = true;
     return null;
   }
-
   return createSpecificShape(shapeType, pointer);
 };
 
@@ -157,9 +138,7 @@ export const modifyShape = ({
   syncShapeInStorage,
 }: ModifyShape) => {
   const selectedElement = canvas.getActiveObject();
-
   if (!selectedElement || selectedElement?.type === 'activeSelection') return;
-
   if (property === 'width') {
     selectedElement.set('scaleX', 1);
     selectedElement.set('width', value);
@@ -170,8 +149,6 @@ export const modifyShape = ({
     if (selectedElement[property as keyof object] === value) return;
     selectedElement.set(property as keyof object, value);
   }
-
   activeObjectRef.current = selectedElement;
-
   syncShapeInStorage(selectedElement);
 };
